@@ -79,8 +79,7 @@ export function batteryOfTests(storageFactory: () => Promise<SessionStorage>) {
 
       await expect(storage.storeSession(session)).resolves.toBeTruthy();
       const storedSession = await storage.loadSession(sessionId);
-      console.log(storedSession, "STORED SESSION");
-      console.log(session, "SESSION");
+
       expect(session.equals(storedSession)).toBeTruthy();
 
       expect(storedSession?.isActive(testScopes)).toBeTruthy();
