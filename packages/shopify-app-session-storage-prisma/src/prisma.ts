@@ -195,7 +195,7 @@ export class PrismaSessionStorage<T extends PrismaClient>
       sessionParams.emailVerified = String(row.emailVerified);
     }
 
-    return Session.fromPropertyArray(Object.entries(sessionParams));
+    return Session.fromPropertyArray(Object.entries(sessionParams), true);
   }
 
   private getSessionTable(): T['session'] {

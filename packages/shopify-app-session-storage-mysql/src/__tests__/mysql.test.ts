@@ -113,6 +113,8 @@ describe('MySQLSessionStorage', () => {
     await storage.disconnect();
 
     const loadedSession = await storage.loadSession(sessionId);
+    console.log(loadedSession, 'loadedSession');
+    console.log(session, 'Session');
     expect(loadedSession).toEqual(session);
     await storage.disconnect();
 
