@@ -8,56 +8,56 @@ const testScopes = ['test_scope'];
 export function batteryOfTests(storageFactory: () => Promise<SessionStorage>) {
   it('can store and delete all kinds of sessions', async () => {
     const sessionFactories = [
-      // async () => {
-      //   const session = new Session({
-      //     id: sessionId,
-      //     shop: 'shop',
-      //     state: 'state',
-      //     isOnline: false,
-      //     scope: testScopes.toString(),
-      //     accessToken: '123',
-      //   });
-      //   return session;
-      // },
-      // async () => {
-      //   const expiryDate = new Date();
-      //   expiryDate.setMilliseconds(0);
-      //   expiryDate.setMinutes(expiryDate.getMinutes() + 60);
-      //   const session = new Session({
-      //     id: sessionId,
-      //     shop: 'shop',
-      //     state: 'state',
-      //     isOnline: false,
-      //     expires: expiryDate,
-      //     accessToken: '123',
-      //     scope: testScopes.toString(),
-      //   });
-      //   return session;
-      // },
-      // async () => {
-      //   const session = new Session({
-      //     id: sessionId,
-      //     shop: 'shop',
-      //     state: 'state',
-      //     isOnline: false,
-      //     expires: null as any,
-      //     scope: testScopes.toString(),
-      //     accessToken: '123',
-      //   });
-      //   return session;
-      // },
-      // async () => {
-      //   const session = new Session({
-      //     id: sessionId,
-      //     shop: 'shop',
-      //     state: 'state',
-      //     isOnline: false,
-      //     expires: undefined,
-      //     scope: testScopes.toString(),
-      //     accessToken: '123',
-      //   });
-      //   return session;
-      // },
+      async () => {
+        const session = new Session({
+          id: sessionId,
+          shop: 'shop',
+          state: 'state',
+          isOnline: false,
+          scope: testScopes.toString(),
+          accessToken: '123',
+        });
+        return session;
+      },
+      async () => {
+        const expiryDate = new Date();
+        expiryDate.setMilliseconds(0);
+        expiryDate.setMinutes(expiryDate.getMinutes() + 60);
+        const session = new Session({
+          id: sessionId,
+          shop: 'shop',
+          state: 'state',
+          isOnline: false,
+          expires: expiryDate,
+          accessToken: '123',
+          scope: testScopes.toString(),
+        });
+        return session;
+      },
+      async () => {
+        const session = new Session({
+          id: sessionId,
+          shop: 'shop',
+          state: 'state',
+          isOnline: false,
+          expires: null as any,
+          scope: testScopes.toString(),
+          accessToken: '123',
+        });
+        return session;
+      },
+      async () => {
+        const session = new Session({
+          id: sessionId,
+          shop: 'shop',
+          state: 'state',
+          isOnline: false,
+          expires: undefined,
+          scope: testScopes.toString(),
+          accessToken: '123',
+        });
+        return session;
+      },
       async () => {
         const session = new Session({
           id: sessionId,
@@ -80,8 +80,6 @@ export function batteryOfTests(storageFactory: () => Promise<SessionStorage>) {
       await expect(storage.storeSession(session)).resolves.toBeTruthy();
       const storedSession = await storage.loadSession(sessionId);
 
-      console.log(session, 'session');
-      console.log(storedSession, 'storedSession');
       expect(session.equals(storedSession)).toBeTruthy();
 
       expect(storedSession?.isActive(testScopes)).toBeTruthy();
